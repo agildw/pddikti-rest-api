@@ -5,13 +5,13 @@ const getData = async (req: Request, res: Response) => {
   let name: string = encodeURIComponent(req.query.name as string);
   const decodeName = decodeURIComponent(name);
 
-  //get dosen, pt, and prodi data from pddikti
-  if (!name)
+  if (!req.query.name)
     return res.status(400).json({
       error: true,
-      message: "name is required",
+      message: "parameter name is required",
     });
 
+  //get dosen, pt, and prodi data from pddikti
   let dataGeneral: any;
   try {
     dataGeneral = await axios.get(`
